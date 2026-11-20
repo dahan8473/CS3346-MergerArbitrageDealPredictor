@@ -1,0 +1,17 @@
+model,params,subgroup,n,failures,brier,log_loss,auc,ece
+Base rate,{},all,179,30,0.1419,0.4624,0.5,0.049
+Base rate,{},friendly,162,14,0.08,0.2996,0.5,0.0321
+Market (raw),{},all,179,30,0.155,0.5555,0.6729,0.1057
+Market (raw),{},friendly,162,14,0.1275,0.4676,0.583,0.1207
+Market (calibrated),"{""C"": 10}",all,179,30,0.1327,0.4221,0.7188,0.0662
+Market (calibrated),"{""C"": 10}",friendly,162,14,0.0819,0.2911,0.6569,0.0199
+LR features only,"{""C"": 10}",all,179,30,0.08,0.3151,0.8074,0.0492
+LR features only,"{""C"": 10}",friendly,162,14,0.0803,0.3163,0.5956,0.04
+LR market + features,"{""C"": 1}",all,179,30,0.082,0.3121,0.8311,0.0443
+LR market + features,"{""C"": 1}",friendly,162,14,0.0812,0.3102,0.6472,0.0428
+Bayes net (expert),"{""ess"": 1}",all,179,30,0.0779,0.3188,0.7847,0.0556
+Bayes net (expert),"{""ess"": 1}",friendly,162,14,0.081,0.3317,0.5425,0.0493
+Bayes net (TAN),"{""ess"": 1}",all,179,30,0.08,0.3163,0.8518,0.0454
+Bayes net (TAN),"{""ess"": 1}",friendly,162,14,0.0754,0.3069,0.6928,0.0407
+LR + fees (leakage check),"{""C"": 0.1}",all,179,30,0.0787,0.2843,0.8588,0.0518
+LR + fees (leakage check),"{""C"": 0.1}",friendly,162,14,0.0792,0.2835,0.7022,0.0395

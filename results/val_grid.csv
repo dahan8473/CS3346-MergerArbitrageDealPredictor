@@ -1,0 +1,81 @@
+model,params,subgroup,n,failures,brier,log_loss,auc,ece
+Base rate,{},all,179,30,0.1419,0.4624,0.5,0.049
+Base rate,{},friendly,162,14,0.08,0.2996,0.5,0.0321
+Market (raw),{},all,179,30,0.155,0.5555,0.6729,0.1057
+Market (raw),{},friendly,162,14,0.1275,0.4676,0.583,0.1207
+Market (calibrated),"{""C"": 0.01}",all,179,30,0.1376,0.4447,0.6855,0.0647
+Market (calibrated),"{""C"": 0.01}",friendly,162,14,0.0804,0.2975,0.6115,0.0282
+Market (calibrated),"{""C"": 0.03}",all,179,30,0.1357,0.4359,0.7159,0.0669
+Market (calibrated),"{""C"": 0.03}",friendly,162,14,0.0809,0.295,0.638,0.0257
+Market (calibrated),"{""C"": 0.1}",all,179,30,0.1339,0.4271,0.7239,0.058
+Market (calibrated),"{""C"": 0.1}",friendly,162,14,0.0811,0.2919,0.6622,0.023
+Market (calibrated),"{""C"": 0.3}",all,179,30,0.1331,0.4234,0.7217,0.061
+Market (calibrated),"{""C"": 0.3}",friendly,162,14,0.0814,0.2909,0.6554,0.0219
+Market (calibrated),"{""C"": 1}",all,179,30,0.1328,0.4224,0.7228,0.0656
+Market (calibrated),"{""C"": 1}",friendly,162,14,0.0817,0.2909,0.6569,0.0268
+Market (calibrated),"{""C"": 3}",all,179,30,0.1327,0.4222,0.7188,0.066
+Market (calibrated),"{""C"": 3}",friendly,162,14,0.0818,0.2911,0.6569,0.02
+Market (calibrated),"{""C"": 10}",all,179,30,0.1327,0.4221,0.7188,0.0662
+Market (calibrated),"{""C"": 10}",friendly,162,14,0.0819,0.2911,0.6569,0.0199
+LR features only,"{""C"": 0.01}",all,179,30,0.0989,0.3361,0.813,0.0615
+LR features only,"{""C"": 0.01}",friendly,162,14,0.0783,0.2892,0.6052,0.0165
+LR features only,"{""C"": 0.03}",all,179,30,0.0863,0.3121,0.8087,0.0536
+LR features only,"{""C"": 0.03}",friendly,162,14,0.079,0.2924,0.5965,0.0259
+LR features only,"{""C"": 0.1}",all,179,30,0.0819,0.3064,0.8081,0.0481
+LR features only,"{""C"": 0.1}",friendly,162,14,0.0798,0.2994,0.596,0.031
+LR features only,"{""C"": 0.3}",all,179,30,0.0807,0.3075,0.8089,0.0487
+LR features only,"{""C"": 0.3}",friendly,162,14,0.0801,0.3052,0.598,0.0364
+LR features only,"{""C"": 1}",all,179,30,0.0802,0.3105,0.8069,0.0501
+LR features only,"{""C"": 1}",friendly,162,14,0.0802,0.3104,0.5946,0.0401
+LR features only,"{""C"": 3}",all,179,30,0.0801,0.3135,0.8067,0.0503
+LR features only,"{""C"": 3}",friendly,162,14,0.0803,0.3143,0.5941,0.041
+LR features only,"{""C"": 10}",all,179,30,0.08,0.3151,0.8074,0.0492
+LR features only,"{""C"": 10}",friendly,162,14,0.0803,0.3163,0.5956,0.04
+LR market + features,"{""C"": 0.01}",all,179,30,0.0977,0.3327,0.8201,0.0522
+LR market + features,"{""C"": 0.01}",friendly,162,14,0.0786,0.2887,0.6236,0.0088
+LR market + features,"{""C"": 0.03}",all,179,30,0.0865,0.3101,0.823,0.0556
+LR market + features,"{""C"": 0.03}",friendly,162,14,0.0794,0.2917,0.6298,0.0305
+LR market + features,"{""C"": 0.1}",all,179,30,0.0828,0.3047,0.8268,0.054
+LR market + features,"{""C"": 0.1}",friendly,162,14,0.0804,0.2978,0.638,0.0397
+LR market + features,"{""C"": 0.3}",all,179,30,0.0821,0.3072,0.83,0.0454
+LR market + features,"{""C"": 0.3}",friendly,162,14,0.0809,0.304,0.6448,0.0412
+LR market + features,"{""C"": 1}",all,179,30,0.082,0.3121,0.8311,0.0443
+LR market + features,"{""C"": 1}",friendly,162,14,0.0812,0.3102,0.6472,0.0428
+LR market + features,"{""C"": 3}",all,179,30,0.0821,0.3154,0.8304,0.0446
+LR market + features,"{""C"": 3}",friendly,162,14,0.0813,0.3141,0.6462,0.0433
+LR market + features,"{""C"": 10}",all,179,30,0.0822,0.3179,0.8295,0.0523
+LR market + features,"{""C"": 10}",friendly,162,14,0.0813,0.3168,0.6448,0.0518
+Bayes net (expert),"{""ess"": 1}",all,179,30,0.0779,0.3188,0.7847,0.0556
+Bayes net (expert),"{""ess"": 1}",friendly,162,14,0.081,0.3317,0.5425,0.0493
+Bayes net (expert),"{""ess"": 5}",all,179,30,0.0779,0.3171,0.782,0.055
+Bayes net (expert),"{""ess"": 5}",friendly,162,14,0.081,0.3294,0.5367,0.0482
+Bayes net (expert),"{""ess"": 10}",all,179,30,0.078,0.3154,0.7744,0.0543
+Bayes net (expert),"{""ess"": 10}",friendly,162,14,0.081,0.327,0.5203,0.0468
+Bayes net (expert),"{""ess"": 20}",all,179,30,0.0781,0.313,0.7659,0.0527
+Bayes net (expert),"{""ess"": 20}",friendly,162,14,0.081,0.3234,0.5019,0.0441
+Bayes net (expert),"{""ess"": 50}",all,179,30,0.0789,0.3103,0.7471,0.049
+Bayes net (expert),"{""ess"": 50}",friendly,162,14,0.0814,0.318,0.4614,0.038
+Bayes net (TAN),"{""ess"": 1}",all,179,30,0.08,0.3163,0.8518,0.0454
+Bayes net (TAN),"{""ess"": 1}",friendly,162,14,0.0754,0.3069,0.6928,0.0407
+Bayes net (TAN),"{""ess"": 5}",all,179,30,0.0801,0.3079,0.8478,0.0446
+Bayes net (TAN),"{""ess"": 5}",friendly,162,14,0.0753,0.2971,0.6841,0.0391
+Bayes net (TAN),"{""ess"": 10}",all,179,30,0.0802,0.3048,0.8457,0.0451
+Bayes net (TAN),"{""ess"": 10}",friendly,162,14,0.0753,0.2931,0.6798,0.03
+Bayes net (TAN),"{""ess"": 20}",all,179,30,0.0807,0.3029,0.8419,0.0431
+Bayes net (TAN),"{""ess"": 20}",friendly,162,14,0.0754,0.2896,0.6716,0.0273
+Bayes net (TAN),"{""ess"": 50}",all,179,30,0.0829,0.3051,0.8402,0.0457
+Bayes net (TAN),"{""ess"": 50}",friendly,162,14,0.076,0.2875,0.6687,0.0209
+LR + fees (leakage check),"{""C"": 0.01}",all,179,30,0.0908,0.3106,0.8662,0.0637
+LR + fees (leakage check),"{""C"": 0.01}",friendly,162,14,0.0768,0.2763,0.7181,0.0217
+LR + fees (leakage check),"{""C"": 0.03}",all,179,30,0.0813,0.2892,0.8658,0.054
+LR + fees (leakage check),"{""C"": 0.03}",friendly,162,14,0.0779,0.2777,0.7172,0.026
+LR + fees (leakage check),"{""C"": 0.1}",all,179,30,0.0787,0.2843,0.8588,0.0518
+LR + fees (leakage check),"{""C"": 0.1}",friendly,162,14,0.0792,0.2835,0.7022,0.0395
+LR + fees (leakage check),"{""C"": 0.3}",all,179,30,0.0788,0.2876,0.8526,0.0411
+LR + fees (leakage check),"{""C"": 0.3}",friendly,162,14,0.0802,0.2908,0.6897,0.0364
+LR + fees (leakage check),"{""C"": 1}",all,179,30,0.0795,0.2952,0.8485,0.038
+LR + fees (leakage check),"{""C"": 1}",friendly,162,14,0.0812,0.3006,0.6819,0.0389
+LR + fees (leakage check),"{""C"": 3}",all,179,30,0.08,0.3008,0.8468,0.0403
+LR + fees (leakage check),"{""C"": 3}",friendly,162,14,0.0818,0.3071,0.6781,0.0424
+LR + fees (leakage check),"{""C"": 10}",all,179,30,0.0803,0.3038,0.8456,0.0493
+LR + fees (leakage check),"{""C"": 10}",friendly,162,14,0.082,0.3105,0.6757,0.0423

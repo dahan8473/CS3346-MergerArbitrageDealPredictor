@@ -5,3 +5,5 @@ data/
 *.parquet
 !download_log.csv
 .ipynb_checkpoints/
+!results/*.csv
+__pycache__/
