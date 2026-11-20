@@ -3,7 +3,9 @@
 # Last Revised: 2026-11-13
 
 
+from difflib import SequenceMatcher
 from pathlib import Path
+import re
 import pandas as pd
 import numpy as np
 
@@ -109,10 +111,43 @@ print(f"Validation Brier ({len(val_mip)} valid-MIP deals): base rate = {base_bri
 
 # Feature flags
 
-# label hostilities (and unsolicited)
-# Expect 111 hostile/unsolicited deals
-df["hostile"] = ((df["Deal Attitude"] == "Hostile") | (df["Deal Attitude"] == "Unsolicited")).astype(int)
-print(df["hostile"].sum())
+# label hostilities (and unsolicited) at announcement
+# SDC "Deal Attitude" is the final attitude: a bid that starts unsolicited and is later agreed shows as Friendly,
+# which leaks the outcome. Bloomberg "Nature of Bid" keeps the history ("Unsolicited to Friendly"),
+# so take its first part where the deal matches, and fall back to SDC otherwise.
+bb = pd.read_excel("data/raw/Bloomberg/Bloomberg Export.xlsx")
+bb["cusip6"] = bb["Target cusip"].astype(str).str.upper().str[:6]
+bb["initial_attitude"] = bb["Nature of Bid"].str.split(" to ").str[0]
+
+# strip punctuation and legal suffixes so "Merck & Co Inc" and "Merck Sharp & Dohme LLC" can be compared
+NAME_SUFFIX = r"\b(inc|corp|corporation|co|company|llc|lp|ltd|plc|holdings?|group|the|sa|nv|ag|se|limited|partners|i|ii|iii|acquisition|merger|sub)\b"
+def clean_name(name):
+    name = re.sub(r"[^a-z0-9 ]", " ", str(name).lower())
+    return re.sub(r"\s+", " ", re.sub(NAME_SUFFIX, "", name)).strip()
+
+# candidate matches: same target 6-digit CUSIP, announced within 30 days
+deals = df.reset_index()[["index", "Target 6-digit CUSIP", "Date Announced", "Acquiror Full Name"]]
+deals["cusip6"] = deals["Target 6-digit CUSIP"].astype(str).str.upper().str.zfill(6)
+cand = deals.merge(bb[["cusip6", "Announce Date", "Acquirer Name", "initial_attitude"]], on="cusip6")
+cand = cand[(cand["Announce Date"] - cand["Date Announced"]).dt.days.abs() <= 30].copy()
+
+# a target can have several bidders in the window (Twitter, Geeknet), so the acquirer has to match too:
+# similar names, or the same first word ("Blackstone Real Estate Advisors" vs "Blackstone Inc")
+sdc_acq = cand["Acquiror Full Name"].map(clean_name)
+bb_acq = cand["Acquirer Name"].map(clean_name)
+cand["name_sim"] = [SequenceMatcher(None, a, b).ratio() for a, b in zip(sdc_acq, bb_acq)]
+cand["same_first_word"] = [a.split()[:1] == b.split()[:1] and a != "" for a, b in zip(sdc_acq, bb_acq)]
+cand = cand[(cand["name_sim"] >= 0.5) | cand["same_first_word"]]
+cand = cand.sort_values("name_sim", ascending=False).drop_duplicates("index").set_index("index")
+
+# Expect 606 deals matched to Bloomberg
+print(len(cand), "deals matched to Bloomberg")
+df["initial_attitude"] = cand["initial_attitude"].reindex(df.index).fillna(df["Deal Attitude"])
+
+# Expect 22 deals where the attitude at announcement differs from SDC's final attitude
+sdc_hostile = df["Deal Attitude"].isin(["Hostile", "Unsolicited"])
+df["hostile"] = df["initial_attitude"].isin(["Hostile", "Unsolicited"]).astype(int)
+print((df["hostile"] != sdc_hostile.astype(int)).sum(), "attitudes corrected,", df["hostile"].sum(), "hostile/unsolicited at announcement")
 
 # turn tenders into a binary flag
 # Expect 195 tender offers
@@ -262,6 +297,7 @@ KEEP = [
     'Target Primary SIC',
     'Acquiror Primary SIC',
     'Deal Attitude',
+    'initial_attitude',
     'Sources of Funds',
     'Tender Offer Flag ',
     'Target Termination Fee (USD Millions)',
