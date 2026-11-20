@@ -1,0 +1,31 @@
+{
+  "mode": "validation",
+  "fit_deals": 48,
+  "eval_deals": 17,
+  "eval_completion_rate": 0.5294117647058824,
+  "params": {
+    "h": 0.0,
+    "theta": 0.5,
+    "b": 0.2,
+    "k": 0.5,
+    "close_rate": {
+      "0": 0.9625,
+      "1": 0.9675
+    }
+  },
+  "brier": {
+    "expectimax": 0.2288715554854503,
+    "base rate": 0.24920853758169936,
+    "attitude rule": 0.20436955788259945
+  },
+  "log_loss": {
+    "expectimax": 0.7082872939588889,
+    "base rate": 0.6915635902463025,
+    "attitude rule": 0.5977236181984253
+  },
+  "raise_mae": {
+    "expectimax": 0.08579007638150579,
+    "training median": 0.08579,
+    "n": 9
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "version": "frozen",
+  "run_at": "2026-11-19T19:06:40",
+  "primary": "Bayes net (expert)",
+  "dev_deals": 761,
+  "test_deals": 339,
+  "test_failures": 66,
+  "test_friendly_failures": 26
+}

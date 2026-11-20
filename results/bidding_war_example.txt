@@ -1,0 +1,15 @@
+Original offer 1.30x unaffected price, A values the target at 1.30x, board backs A (margin 0.20)
+  chance p=0.52: rival values it at 1.20x -> A wins at 1.30x
+  chance p=0.26: rival values it at 1.40x -> A wins at 1.30x
+  chance p=0.13: rival values it at 1.60x -> R wins at 1.55x
+  chance p=0.06: rival values it at 1.80x -> R wins at 1.55x
+  chance p=0.03: rival values it at 2.00x -> R wins at 1.55x
+  expectimax: P(A wins) = 0.77, expected price if A wins = 1.30x
+
+Original offer 1.30x unaffected price, A values the target at 1.30x, board backs the rival (margin 0.20)
+  chance p=0.52: rival values it at 1.20x -> A wins at 1.30x
+  chance p=0.26: rival values it at 1.40x -> R wins at 1.35x
+  chance p=0.13: rival values it at 1.60x -> R wins at 1.35x
+  chance p=0.06: rival values it at 1.80x -> R wins at 1.35x
+  chance p=0.03: rival values it at 2.00x -> R wins at 1.35x
+  expectimax: P(A wins) = 0.52, expected price if A wins = 1.30x

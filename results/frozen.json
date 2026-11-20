@@ -1,0 +1,25 @@
+{
+  "params": {
+    "Base rate": {},
+    "Market (raw)": {},
+    "Market (calibrated)": {
+      "C": 10
+    },
+    "LR features only": {
+      "C": 10
+    },
+    "LR market + features": {
+      "C": 1
+    },
+    "Bayes net (expert)": {
+      "ess": 1
+    },
+    "Bayes net (TAN)": {
+      "ess": 1
+    },
+    "LR + fees (leakage check)": {
+      "C": 0.1
+    }
+  },
+  "primary": "Bayes net (expert)"
+}
