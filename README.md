@@ -16,25 +16,64 @@ data/sic1987_all.csv        public, github.com/danielruss/codingsystems
 
 ## Setup
 
+Python 3.11 or newer. Run everything from the repo folder.
+
+Windows:
 ```
 python -m venv .venv
-.venv/bin/pip install -r requirements.txt     # Windows: .venv\Scripts\pip
+.venv\Scripts\activate
+pip install -r requirements.txt
 ```
 
-`pywinpty` only builds on Windows. On macOS or Linux, drop that line.
+macOS / Linux (delete the `pywinpty` line from `requirements.txt` first, it only builds on Windows):
+```
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
 
 ## Run
 
-| Step | Command | Output |
-|---|---|---|
-| 1. Clean, label, split, features | `python build_table.py` | `data/deals.csv` |
-| 2. Tune on validation (2020-2021) | `python validate.py` | `results/val_grid.csv`, `val_metrics.csv`, `frozen.json` |
-| 3. Bidding war, validation | `python bidding_war.py` | `results/bidding_war_val.json` |
-| 4. Single test run (2022-2024) | `python test_run.py` | `results/test_*.csv`, `test_run.json` |
-| 5. Bidding war, test | `python bidding_war.py --test` | `results/bidding_war_test.json` |
-| 6. Figures | `python figures.py` | `figures/*.png` |
+With the virtual environment active, run these in order:
 
-Steps 4 and 5 were run once, from the git tag `frozen`. Nothing was tuned after that.
+```
+python build_table.py
+python validate.py
+python bidding_war.py
+python test_run.py
+python bidding_war.py --test
+python figures.py
+```
+
+| Step | What it does | Output |
+|---|---|---|
+| `build_table.py` | Clean, label, split, build features | `data/deals.csv` |
+| `validate.py` | Fit on 2015-2019, tune on 2020-2021 | `results/val_grid.csv`, `val_metrics.csv`, `frozen.json` |
+| `bidding_war.py` | Bidding war, validation | `results/bidding_war_val.json` |
+| `test_run.py` | Refit on 2015-2021, score 2022-2024 once | `results/test_*.csv`, `test_run.json` |
+| `bidding_war.py --test` | Bidding war, test | `results/bidding_war_test.json` |
+| `figures.py` | Report figures | `figures/*.png` |
+
+The whole run takes under a minute.
+
+## Check it worked
+
+The scripts print these numbers. If yours match, your setup reproduces ours.
+
+| Script | Should print |
+|---|---|
+| `build_table.py` | `10 files, 1100 rows`, `606 deals matched to Bloomberg`, `22 attitudes corrected` |
+| `validate.py` | `primary model for the test run: Bayes net (expert)` |
+| `test_run.py` | `dev 761 deals / 99 failures, test 339 deals / 66 failures`, and Bayes net (expert) Brier `0.0778` on all deals |
+| `bidding_war.py --test` | `contested deals: fit 65, test 23` and `"expectimax": 0.2006...` under brier |
+
+`build_table.py` also stops with an error if the data looks wrong (duplicate deals, missing values, leaked columns).
+
+After a full run, `git status` should only show `results/test_run.json` as changed (it records the run time). Every other result and figure comes out byte-identical.
+
+## Don't change the models
+
+The test years (2022-2024) were scored once, from the git tag `frozen`. Rerunning the scripts as they are is fine: they give the same numbers. Changing a model, feature or setting now means choosing it after seeing test results. Any such change has to be reported as a separate follow-up experiment, not as the main result.
 
 ## Models
 
