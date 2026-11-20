@@ -1,0 +1,29 @@
+model,vs,subgroup,brier_diff,lo,hi,clear_win
+Base rate,Market (calibrated),all,0.0216,0.0105,0.0334,False
+Base rate,Market (calibrated),friendly,-0.0006,-0.0075,0.0063,False
+Market (raw),Market (calibrated),all,0.0194,-0.0024,0.0422,False
+Market (raw),Market (calibrated),friendly,0.0519,0.0321,0.0729,False
+Market (raw),Base rate,all,-0.0022,-0.0335,0.0287,False
+Market (raw),Base rate,friendly,0.0526,0.0276,0.0793,False
+Market (calibrated),Base rate,all,-0.0216,-0.0334,-0.0105,True
+Market (calibrated),Base rate,friendly,0.0006,-0.0063,0.0075,False
+LR features only,Market (calibrated),all,-0.0619,-0.0852,-0.0398,True
+LR features only,Market (calibrated),friendly,-0.0036,-0.011,0.0046,False
+LR features only,Base rate,all,-0.0835,-0.1126,-0.0569,True
+LR features only,Base rate,friendly,-0.0029,-0.0067,0.0014,False
+LR market + features,Market (calibrated),all,-0.0629,-0.0857,-0.0413,True
+LR market + features,Market (calibrated),friendly,-0.0036,-0.0092,0.0027,False
+LR market + features,Base rate,all,-0.0845,-0.1133,-0.0569,True
+LR market + features,Base rate,friendly,-0.0029,-0.0089,0.0032,False
+Bayes net (expert),Market (calibrated),all,-0.0616,-0.0861,-0.0384,True
+Bayes net (expert),Market (calibrated),friendly,-0.0044,-0.0122,0.0039,False
+Bayes net (expert),Base rate,all,-0.0831,-0.1125,-0.0564,True
+Bayes net (expert),Base rate,friendly,-0.0038,-0.007,-0.0001,True
+Bayes net (TAN),Market (calibrated),all,-0.0654,-0.0898,-0.0425,True
+Bayes net (TAN),Market (calibrated),friendly,-0.0026,-0.0105,0.0063,False
+Bayes net (TAN),Base rate,all,-0.087,-0.1182,-0.0586,True
+Bayes net (TAN),Base rate,friendly,-0.002,-0.0079,0.004,False
+LR + fees (leakage check),Market (calibrated),all,-0.0707,-0.0927,-0.0501,True
+LR + fees (leakage check),Market (calibrated),friendly,-0.0109,-0.0162,-0.0054,True
+LR + fees (leakage check),Base rate,all,-0.0923,-0.1215,-0.0652,True
+LR + fees (leakage check),Base rate,friendly,-0.0102,-0.0163,-0.0048,True
